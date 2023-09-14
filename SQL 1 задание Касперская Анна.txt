@@ -1,0 +1,26 @@
+Задание 1
+
+SELECT c.login, COUNT(o.track) 
+FROM "Couriers" AS c 
+INNER JOIN "Orders" AS o ON o."courierId" = c.id 
+WHERE o."inDelivery" = true 
+GROUP BY c.login; -- вывод списка логинов курьеров с количеством их заказов в статусе «В доставке» (поле inDelivery = true)
+
+morty@4f12031e2814:~$ ^C
+ login | count
+-------+-------
+ ninja |     2
+(1 row)
+
+
+Задание 2
+
+SELECT track,
+CASE
+WHEN finished = true THEN 2
+WHEN cancelled = true THEN -1
+WHEN "inDelivery" = true THEN 1 
+ELSE 0 
+END 
+FROM "Orders";
+-- пока баш в очередной раз не забыл что такое psql - запрос работал.
